@@ -2,21 +2,21 @@ Classificador de Tickets Inteligente (Machine Learning + SQL)
 
 Este projeto é um sistema de triagem automática de chamados técnicos que utiliza Inteligência Artificial para classificar a prioridade de problemas, aprendendo continuamente com o feedback humano.
 
-##Diferenciais Técnicos
+Diferenciais Técnicos
 - **Aprendizado Ativo (Human-in-the-loop):** O sistema permite que o analista corrija a classificação da IA, aprimorando o modelo em tempo real.
 - **Persistência Relacional:** Utiliza **SQLite** para armazenar novos conhecimentos, garantindo que o aprendizado não seja perdido ao fechar o software.
 - **Algoritmo Random Forest:** Implementação robusta de florestas aleatórias para classificação de texto (NLP).
 
-##Tecnologias Utilizadas
+Tecnologias Utilizadas
 - **Python 3.13**
 - **Scikit-Learn**: Processamento de linguagem natural e Random Forest.
 - **Pandas**: Manipulação de dados para treinamento.
 - **SQLite3**: Banco de dados para persistência de memória.
 
-##Como o Modelo Funciona
+Como o Modelo Funciona
 O modelo converte descrições de texto em vetores numéricos através do `CountVectorizer` e utiliza um conjunto de árvores de decisão para definir se a urgência é **Alta, Média ou Baixa**.
 
-##Como Testar
+Como Testar
 1.Instale as dependências necessárias:
 `pip install pandas scikit-learn`
 
