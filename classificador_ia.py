@@ -5,18 +5,18 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.pipeline import Pipeline
 
-# --- CONFIGURAÇÃO DO BANCO DE DADOS ---
+#configuração banco de dados
 DB_NAME = "memoria_ia.db"
 
 def carregar_ou_criar_dados():
-    # Se o banco já existir, lê os dados de lá
+    #se o banco já existir, lê os dados de lá
     if os.path.exists(DB_NAME):
         conn = sqlite3.connect(DB_NAME)
         df = pd.read_sql("SELECT * FROM treinamento", conn)
         conn.close()
         return df
     else:
-        # Se não existe, cria com seus dados iniciais
+        #se não existe, cria com seus dados iniciais
         dados_iniciais = {
             'descricao': [
                 'Sistema paralisado, erro de conexão com banco SQL', 'A tela ficou azul', 
@@ -39,7 +39,7 @@ def salvar_no_banco(df_atualizado):
     df_atualizado.to_sql("treinamento", conn, if_exists="replace", index=False)
     conn.close()
 
-# --- ENGINE DA IA ---
+#engine da IA
 def treinar_modelo(dados_df):
     modelo = Pipeline([
         ('vetorizador', CountVectorizer()),
@@ -48,7 +48,7 @@ def treinar_modelo(dados_df):
     modelo.fit(dados_df['descricao'], dados_df['prioridade'])
     return modelo
 
-# 1. Início do Sistema
+#início do Sistema
 df = carregar_ou_criar_dados()
 modelo = treinar_modelo(df)
 
@@ -73,14 +73,14 @@ while True:
                 break
             print("❌ Por favor, digite apenas Alta, Media ou Baixa.")
         
-        # 2. Atualiza em memória
+        #atualiza em memória
         novo_exemplo = pd.DataFrame({'descricao': [texto], 'prioridade': [correta]})
         df = pd.concat([df, novo_exemplo], ignore_index=True)
         
-        # 3. Salva no Banco de Dados (Persistência)
+        #salva no Banco de Dados (Persistência)
         salvar_no_banco(df)
         
-        # 4. Re-treina a IA
+        #re-treina a IA
         modelo = treinar_modelo(df)
         print(f"🧠 Conhecimento salvo! Agora tenho {len(df)} exemplos.")
 
