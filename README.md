@@ -27,6 +27,8 @@ Como Testar
 Descreva um problema técnico quando solicitado (Ex: "Sistema fora do ar").
 A IA sugerirá uma prioridade (Alta, Média ou Baixa).
 
+![Visitantes](https://visitor-badge.laobi.icu/badge?page_id=AndersonParisotto.classificador-tickets-ia-sqlite)
+
 4.Treine a IA:
 Caso a sugestão esteja incorreta, informe a prioridade correta.
 O sistema salvará o novo exemplo no banco de dados e re-treinará o modelo instantaneamente.
